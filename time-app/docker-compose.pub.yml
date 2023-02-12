@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  frontend:
+    build: ishkining/time-app-frontend-dev
+    restart: always
+    ports:
+      - '3000:3000'
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+  api:
+    build: ishkining/time-app-api-dev
+    restart: always
+    ports:
+      - '5555:5000'
+    depends_on:
+      - mysql
+    volumes:
+      - /app/node_modules
+      - ./api:/app
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: root
+      MYSQL_USER: '3306'
+      MYSQL_PASSWORD: password
+      MYSQL_DB: time_db
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: time_db
+    volumes:
+      - mysql_data_pub:/var/lib/mysql
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - '8888:8080'
+
+volumes:
+  mysql_data_pub:
