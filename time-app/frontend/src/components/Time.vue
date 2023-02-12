@@ -1,6 +1,6 @@
 <script>
-import moment from 'moment'
-import { startInterval, saveTime, deleteTime } from '../utils/time'
+import moment from "moment";
+import { startInterval, saveTime, deleteTime } from "../utils/time";
 
 export default {
   props: {
@@ -8,9 +8,9 @@ export default {
   },
   data() {
     return {
-      currentTime: moment().format('HH:mm:ss'),
+      currentTime: moment().format("HH:mm:ss"),
       savedTimes: [],
-    }
+    };
   },
   methods: {
     startInterval,
@@ -18,21 +18,21 @@ export default {
     deleteTime,
   },
   created: async function () {
-    this.startInterval()
-    const res = await fetch('http://localhost:5555/times')
-    const json = await res.json()
-    if (json.length) this.savedTimes = json
+    this.startInterval();
+    const res = await fetch("http://localhost:5555/times");
+    const json = await res.json();
+    if (json.length) this.savedTimes = json;
   },
-}
+};
 </script>
 
 <template>
   <div class="greetings">
     <h1 class="green">{{ currentTime }}</h1>
-    <h3>Нажмите кнопку для сохранения в базе данных</h3>
-    <button @click="saveTime">Сохранить время</button>
+    <h3>Нажмите кнопку для сохранения в базе данныхdsd</h3>
+    <button @click="saveTime">Сохранить this время</button>
     <h3 v-if="savedTimes.length && showSavedTimes">
-      Ранее сохраненные времена:
+      Ранее сохраненные временаd1:
     </h3>
     <div
       v-if="showSavedTimes"
